@@ -7,3 +7,4 @@ second extra LINE
 
 third new line
 
+Some completely unrelated text
