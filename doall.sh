@@ -6,4 +6,6 @@
 
 module load R
 
+cd mitral
+
 Rscript doall.R
