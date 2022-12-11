@@ -2,16 +2,16 @@ library(dplyr)
 library(data.table)
 library(parallel)
 
-path = '../Chromosom1_22_rda'
+path = '../Chromosom1_22_rda' #path is home/nfeirer/Chromosom1_22_rda directory
 
-#' Read one Roselli chromosome data file 
-#'
+#' Read one chromosome data file 
+#' aim: combine the information of 22 chromosomes as a reference list
 #' 
-#' @param file 
-#' @param path 
-#' @param drop.NA 
-#' @param which.cols 
-#' @param ... 
+#' @param file (new_chr1, ..., new_chr22)
+#' @param path (Chromosom1_22_rda)
+#' @param drop.NA (every file contains NAs -> keep only the non-NA rows)
+#' @param which.cols (only column "rs" and "chr_pos" for rs-number and position of the SNP on the chromosome)
+#' @param ... (for possible later changes)
 #'
 #' @return
 #' @export
@@ -38,14 +38,14 @@ read.one <- function(file,
                                # environment to be availble for the seesion
 }
 
-#' Read all Roselli chromosome data files
+#' Read all chromosome data files
 #'
-#' @param base 
-#' @param ext 
-#' @param path 
-#' @param index 
-#' @param ... 
-#'
+#' @param base = base name of input variables new_chr (1 to 22)
+#' @param ext = .rda (all new_chr are .rda-files)
+#' @param path = . or home/nfeirer/Chromosom1_22_rda directory
+#' @param index = chr 1 to 22
+#' @param ... = for possible later changes
+#' @lapply = make a list with the index 1 to 22 for all chromosomes, use function read.one from above
 #' @return
 #' @export
 #'
@@ -61,14 +61,14 @@ read.all <- function(base  = 'new_chr',
                                      ...)})
 }
 
-#' combine previously loaded Roselli chromosome dataframes
+#' combine previously loaded chromosome dataframes
 #'
 #'
-#' @param base base name of input variables
-#' @param index vector if chromosome indices to process
-#' @param ... 
+#' @param base = base name of input variables -> does not net ext = ".rda" as the dataframes are already loaded
+#' @param index = vector of chromosome indices to process
+#' @param ... = for possible later changes
 #'
-#' @return
+#' @return = returns "all" vector for combine.all function
 #' @export
 #'
 #' @examples
@@ -83,7 +83,7 @@ combine.all <- function(base  = 'new_chr',
   return(all)
 }
 
-#' read and combine  Roselli chromosome data files
+#' read and combine chromosome data files
 #'
 #' The merged dataframe is saved in RDS format and also returned (invisibly)
 #'
@@ -91,7 +91,7 @@ combine.all <- function(base  = 'new_chr',
 #' @param ... passed on to all internal calls
 #'
 #' @return merged dataframe (invisibly)
-#' @export
+#' @export -> as RDS file (more practical than rda files!) --> "merge.tbl.rds"
 #'
 #' @examples
 do.all <- function(outfile = "merge.tbl",
