@@ -5,30 +5,21 @@ library(dplyr)
 library(data.table)
 library(parallel)
 
-path = #is currently home directory, might move all 22 rds-files into a directory for better organisation
-
-#read one chr_roselli file (including all columns)
-
-read.one <- function(file,
-                     path       = '.',
-                     drop.NA    = TRUE,
-                     #which.cols = c(1,4), -> not needed as we want all columns now
-                     ...){
-  var <- load(file.path(path,file),     # var is name of variable just loaded
-              ...)  
-  one <- get(var)
-  # if(drop.NA && ncol(one)==4) {
-  #   one <- subset(one,
-  #                 subset = !is.na(one[,2]),  # non-NA rows
-  #                 select = which.cols)       # rs + chr:pos
-  # } else {
-  #   one <- one[,which.cols]
-  # }
-  assign(var,
-         one,
-         envir = .GlobalEnv)   # make sure the variable is created in the global
-  # environment to be availble for the seesion
-}
+path = "../refchr_roselli" 
+  
+  #read one chr_roselli file (including all columns)
+  
+  read.one <- function(file,
+                       path       = '.',
+                       drop.NA    = TRUE,
+                       #which.cols = c(1,4), -> not needed as we want all columns now
+                       ...){
+    var <- readRDS(file.path(path,file),     # var is name of variable just loaded
+                ...)  
+    assign(var,
+           envir = .GlobalEnv)   # make sure the variable is created in the global
+    # environment to be availble for the seesion
+  }
 
 #read all chr_roselli files
 read.all <- function(base  = 'chr', 
