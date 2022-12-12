@@ -35,7 +35,7 @@ read.all <- function(base  = 'chr',
 
 #' combine previously loaded chromosome_roselli dataframes
 
-combine.all <- function(base  = 'new_chr',
+combine.all <- function(base  = 'chr',
                         index = 1:22,
                         ...){
   all <- eval(parse(text = paste0('rbind(',
